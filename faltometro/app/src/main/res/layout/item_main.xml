@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<carbon.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_discipline_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:background="#03a9f4"
+    android:elevation="4dp"
+    app:carbon_elevation="4dp"
+    app:carbon_cornerRadius="0dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="12dp"
+        >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="center_vertical"
+            >
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <TextView
+                    android:id="@+id/item_discipline_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_centerHorizontal="true"
+                    android:text="Nome da Disciplina"
+                    android:textAllCaps="true"
+                    android:singleLine="true"
+                    android:textSize="20dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_below="@+id/item_discipline_name"
+                    android:layout_toRightOf="@+id/dynamicArcView"
+                    android:layout_margin="16dp"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:id="@+id/item_discipline_days"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/item_discipline_name"
+                        android:layout_toRightOf="@+id/dynamicArcView"
+                        android:text="Seg Ter Qua Qui Sex Sab Dom"
+                        android:textSize="14dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/item_discipline_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/item_discipline_days"
+                        android:layout_toRightOf="@+id/dynamicArcView"
+                        android:text="08h30"
+                        android:textSize="14dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/item_discipline_faults"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/item_discipline_time"
+                        android:layout_toRightOf="@+id/dynamicArcView"
+                        android:text="16 faltas de 20"
+                        android:textSize="14dp"
+                        />
+
+                </LinearLayout>
+
+                <com.hookedonplay.decoviewlib.DecoView
+                    android:id="@+id/dynamicArcView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_below="@+id/item_discipline_name"
+                    />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</carbon.widget.CardView>
