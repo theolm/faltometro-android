@@ -12,7 +12,8 @@
     android:background="#03a9f4"
     android:elevation="4dp"
     app:carbon_elevation="4dp"
-    app:carbon_cornerRadius="0dp"
+    app:carbon_cornerRadius="4dp"
+    android:transitionName="@string/transition_card"
     >
 
     <LinearLayout

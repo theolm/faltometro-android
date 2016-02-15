@@ -1,6 +1,7 @@
 package com.ufrgs.faltometro.vos;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by theo on 12/29/15.
@@ -15,4 +16,6 @@ public class DisciplineVo {
     public int credits;
     public String time;
     public String cor;
+    public List<AbsenceVo> absenceVoList = new ArrayList<>();
+    public int hash;
 }

@@ -8,6 +8,7 @@
     <color name="colorAccent">@color/colorPrimary</color> <!-- mono-color -->
     <color name="colorPrimaryDark">#5acc95</color>
     <color name="colorSuperPrimaryDark">#11261c</color> <!-- same hue & sat, 15% brightness -->
+    <color name="colorStatusbar">#212121</color>
 
     <!-- common colours -->
     <color name="text_primary_dark">#de000000</color> <!-- 87% -->

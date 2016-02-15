@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.ufrgs.faltometro.adapters.DisciplineAdapter;
 import com.ufrgs.faltometro.support.DatabaseHandler;
 import com.ufrgs.faltometro.utils.ItemClickSupport;
 import com.ufrgs.faltometro.utils.LayoutUtils;
+import com.ufrgs.faltometro.vos.AbsenceVo;
 import com.ufrgs.faltometro.vos.DisciplineVo;
 
 import java.util.List;
@@ -26,6 +28,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
     @Bind(R.id.main_toolbar) Toolbar toolbar;
     @Bind(R.id.recyclerview) RecyclerView recyclerView;
@@ -47,12 +50,6 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new DisciplineAdapter(this, getDisciplineList());
         recyclerView.setAdapter(mAdapter);
 
-        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                //Snackbar.make(v, "Click longo para editar", Snackbar.LENGTH_SHORT).show();
-            }
-        });
 
         ItemClickSupport.addTo(recyclerView).setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
             @Override
@@ -86,14 +83,14 @@ public class MainActivity extends AppCompatActivity {
         DatabaseHandler db = new DatabaseHandler(this);
         return db.getAllDisciplines();
     }
-
+    
     private void reloadAllDisciplines(){
         if (mAdapter != null)
             mAdapter.reloadAdapter(getDisciplineList());
     }
 
     private void showOptionDialog(final int position){
-        CharSequence options[] = new CharSequence[] {"Adicionar Falta", "Remover Falta", "Editar Disciplina", "Deletar Disciplina"};
+        CharSequence options[] = new CharSequence[] {"Editar Disciplina", "Deletar Disciplina"};
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -104,19 +101,11 @@ public class MainActivity extends AppCompatActivity {
                 DatabaseHandler db = new DatabaseHandler(MainActivity.this);
                 switch (which){
                     case 0:
-                        db.addAbsence(discipline);
-                        reloadAllDisciplines();
-                        break;
-                    case 1:
-                        db.removeAbsence(discipline);
-                        reloadAllDisciplines();
-                        break;
-                    case 2:
                         Intent i = new Intent(MainActivity.this, AddDisciplineActivity.class);
                         i.putExtra("position", position);
                         startActivity(i);
                         break;
-                    case 3:
+                    case 1:
                         db.deleteDiscipline(discipline);
                         reloadAllDisciplines();
                         break;

@@ -4,30 +4,24 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.design.widget.Snackbar;
+import android.os.Build;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.amulyakhare.textdrawable.TextDrawable;
-import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
-import com.hookedonplay.decoviewlib.charts.SeriesLabel;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
 import com.ufrgs.faltometro.R;
-import com.ufrgs.faltometro.activities.AddDisciplineActivity;
-import com.ufrgs.faltometro.support.DatabaseHandler;
+import com.ufrgs.faltometro.activities.AbsencesActivity;
 import com.ufrgs.faltometro.vos.DisciplineVo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import carbon.widget.Button;
-import carbon.widget.CardView;
+import com.ufrgs.faltometro.viewholders.DisciplineViewHolder;
 
 /**
  * Created by theo on 12/29/15.
@@ -97,6 +91,23 @@ public class DisciplineAdapter extends RecyclerView.Adapter<DisciplineViewHolder
 
         holder.decoView.addEvent(new DecoEvent.Builder(vo.totalFaults).setIndex(series1Index).setDelay(0).build());
 
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(mContext, AbsencesActivity.class);
+                i.putExtra("position", position);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation((Activity) mContext , holder.card, mContext.getString(R.string.transition_card));
+                    mContext.startActivity(i, options.toBundle());
+                }
+                else {
+                    mContext.startActivity(i);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -144,25 +155,3 @@ public class DisciplineAdapter extends RecyclerView.Adapter<DisciplineViewHolder
     }
 }
 
-class DisciplineViewHolder extends RecyclerView.ViewHolder {
-
-    public DecoView decoView;
-    public CardView card;
-    public TextView name;
-    public TextView faults;
-    public TextView days;
-    public TextView time;
-
-
-    public DisciplineViewHolder(View itemView) {
-        super(itemView);
-
-        decoView = (DecoView) itemView.findViewById(R.id.dynamicArcView);
-        name = (TextView) itemView.findViewById(R.id.item_discipline_name);
-        faults = (TextView) itemView.findViewById(R.id.item_discipline_faults);
-        days = (TextView) itemView.findViewById(R.id.item_discipline_days);
-        time = (TextView) itemView.findViewById(R.id.item_discipline_time);
-        card = (CardView) itemView.findViewById(R.id.item_discipline_card);
-
-    }
-}

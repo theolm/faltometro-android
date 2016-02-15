@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Faltometro</string>
+    <string name="transition_card">card_transition</string>
+
+    <string name="dialog_absence_delete_title">Deletar Falta</string>
+    <string name="dialog_absence_delete_message">Deseja remover essa falta?</string>
 </resources>
