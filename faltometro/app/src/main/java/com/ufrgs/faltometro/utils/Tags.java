@@ -15,4 +15,6 @@ public class Tags {
     public final static String PINK_COLOR = "#E91E63";
     public final static String BROWN_COLOR = "#795548";
 
+    public static final String DISCIPLINE_ID = "disciplineId";
+
 }
