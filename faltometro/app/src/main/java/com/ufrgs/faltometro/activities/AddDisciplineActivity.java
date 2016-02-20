@@ -19,6 +19,7 @@ import com.ufrgs.faltometro.support.DatabaseHandler;
 import com.ufrgs.faltometro.utils.LayoutUtils;
 import com.ufrgs.faltometro.utils.Tags;
 import com.ufrgs.faltometro.vos.DisciplineVo;
+import com.ufrgs.faltometro.widget.WidgetUpdate;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -88,6 +89,7 @@ public class AddDisciplineActivity extends AppCompatActivity {
                             DatabaseHandler db = new DatabaseHandler(AddDisciplineActivity.this);
                             db.updateDiscipline(createDiscipline());
                         }
+                        WidgetUpdate.update(AddDisciplineActivity.this);
                         finish();
 
                     } else {

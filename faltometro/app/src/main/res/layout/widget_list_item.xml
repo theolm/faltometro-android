@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/widget.item.layout"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#7B1FA2">
+
+    <TextView
+        android:id="@+id/widget.item.name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginLeft="15dp"
+        tools:text="Classificação e Pesquisa de dados"
+        android:layout_centerVertical="true"
+        android:maxLines="1"
+        android:layout_toLeftOf="@+id/widget.item.ratio"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:id="@+id/widget.item.ratio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginLeft="15dp"
+        tools:text="3/8"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
+
+
+</RelativeLayout>
