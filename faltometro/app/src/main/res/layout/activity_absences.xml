@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#88000000"
+    android:id="@+id/absence.bg"
     >
 
     <carbon.widget.CardView
@@ -18,6 +19,7 @@
         android:layout_marginTop="70dp"
         android:layout_marginBottom="70dp"
         android:layout_centerInParent="true"
+        android:clickable="true"
         app:carbon_cornerRadius="4dp"
         app:carbon_elevation="10dp"
         android:transitionName="@string/transition_card"
