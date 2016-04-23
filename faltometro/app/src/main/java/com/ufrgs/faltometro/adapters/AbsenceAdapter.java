@@ -31,10 +31,6 @@ public class AbsenceAdapter extends RecyclerView.Adapter<AbsenceItemViewHolder> 
         disciplineVo = discipline;
     }
 
-    public AbsenceVo getItemAt(int position){
-        return absenceVoList.get(position);
-    }
-
     @Override
     public AbsenceItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new AbsenceItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_absence, parent, false));
