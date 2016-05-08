@@ -271,7 +271,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         disciplineTableValues.put(KEY_FALTAS, disciplineVo.totalFaults + 1);
 
         Calendar c = Calendar.getInstance();
-        String currentDate = String.valueOf(c.get(Calendar.DAY_OF_MONTH)) + "/" + String.valueOf(c.get(Calendar.MONTH)) + "/" + String.valueOf(c.get(Calendar.YEAR));
+        String currentDate = String.valueOf(c.get(Calendar.DAY_OF_MONTH)) + "/" + String.valueOf(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
 
         ContentValues absenceTableValues = new ContentValues();
         absenceTableValues.put(KEY_FOREIGN_ID, disciplineVo.hash);
@@ -297,6 +297,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         } else{
             return -1;
         }
+    }
+
+    public int editAbsence(AbsenceVo absenceVo){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_DATE, absenceVo.date);
+        int update_status = db.update(TABLE_ABSENCES, values, KEY_ID_ABSENCE + " = ?", new String[]{String.valueOf(absenceVo.id)});
+        db.close();
+
+        return update_status;
     }
 
     public void deleteDiscipline(DisciplineVo disciplineVo)
