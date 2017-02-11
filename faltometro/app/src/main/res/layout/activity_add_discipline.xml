@@ -11,7 +11,7 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/carbon_grey_800"
+        android:background="@color/grey_800"
         android:elevation="6dp"
         android:contentInsetLeft="0dp"
         android:contentInsetRight="0dp"
@@ -312,22 +312,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="20dp"
                 >
 
-                <carbon.widget.Button
+                <Button
                     android:id="@+id/btn_add"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="60dp"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_centerInParent="true"
-                    android:background="@color/carbon_grey_800"
                     android:text="ADICIONAR"
-                    android:textColor="@android:color/white"
-                    app:carbon_textAllCaps="true"
-                    app:carbon_cornerRadius="4dp"
-                    app:carbon_rippleColor="@color/colorPrimary"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:elevation="3dp"
+                    android:textColorLink="@color/white"
                     />
 
             </RelativeLayout>

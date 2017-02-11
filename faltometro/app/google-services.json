@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "978903390186",
+    "firebase_url": "https://faltometro-7a76f.firebaseio.com",
+    "project_id": "faltometro-7a76f",
+    "storage_bucket": "faltometro-7a76f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978903390186:android:c373c3ed331436cc",
+        "android_client_info": {
+          "package_name": "com.ufrgs.faltometro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978903390186-gup0kefkt5hosarsco3op2mg895gqfem.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ufrgs.faltometro",
+            "certificate_hash": "C57AF4E59404FC31D485FCFBD5D4302067354B31"
+          }
+        },
+        {
+          "client_id": "978903390186-6jmeipuutae4igmm4icog2dn6jit8489.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9UuupPMTXUAu-ZGMzQaq7IO6hshimVXE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978903390186-6jmeipuutae4igmm4icog2dn6jit8489.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

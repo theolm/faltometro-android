@@ -24,15 +24,15 @@ import com.ufrgs.faltometro.vos.DisciplineVo;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
-    @Bind(R.id.main_toolbar) Toolbar toolbar;
-    @Bind(R.id.recyclerview) RecyclerView recyclerView;
-    @Bind(R.id.fab) FloatingActionButton fab;
+    @BindView(R.id.main_toolbar) Toolbar toolbar;
+    @BindView(R.id.recyclerview) RecyclerView recyclerView;
+    @BindView(R.id.fab) FloatingActionButton fab;
 
     private DisciplineAdapter mAdapter;
 

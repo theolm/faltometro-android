@@ -5,10 +5,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ufrgs.faltometro.R;
@@ -21,22 +24,19 @@ import com.ufrgs.faltometro.vos.DisciplineVo;
 
 import java.util.Calendar;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import carbon.widget.CardView;
-import carbon.widget.LinearLayout;
-import carbon.widget.RelativeLayout;
 
 /**
  * Created by theo on 2/13/16.
  */
 public class AbsencesActivity extends AppCompatActivity {
 
-    @Bind(R.id.absence_card) CardView cardView;
-    @Bind(R.id.absence_name) TextView disciplineName;
-    @Bind(R.id.absence_recyclerview) RecyclerView recyclerView;
-    @Bind(R.id.absence_ll_add) LinearLayout llAddAbsence;
-    @Bind(R.id.absence_bg) RelativeLayout bg;
+    @BindView(R.id.absence_card) CardView cardView;
+    @BindView(R.id.absence_name) TextView disciplineName;
+    @BindView(R.id.absence_recyclerview) RecyclerView recyclerView;
+    @BindView(R.id.absence_ll_add) LinearLayout llAddAbsence;
+    @BindView(R.id.absence_bg) RelativeLayout bg;
 
     private DisciplineVo disciplineVo;
     private AbsenceAdapter mAdapter;

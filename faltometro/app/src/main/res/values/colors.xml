@@ -10,6 +10,8 @@
     <color name="colorSuperPrimaryDark">#11261c</color> <!-- same hue & sat, 15% brightness -->
     <color name="colorStatusbar">#212121</color>
 
+    <color name="white">#FFFFFF</color>
+
     <!-- common colours -->
     <color name="text_primary_dark">#de000000</color> <!-- 87% -->
     <color name="text_secondary_dark">#8a000000</color> <!-- 54% -->
@@ -36,6 +38,8 @@
     <color name="page_indicator_dark">#80333333</color>
     <color name="page_indicator_dark_selected">#ff333333</color>
     <color name="selected_comment_background">#ffffffff</color>
+
+    <color name="grey_800">#424242</color>
 
     <!-- text (most text uses material theme colours) -->
     <color name="hint_disabled_dark">#43000000</color> <!-- 26% black -->

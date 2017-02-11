@@ -1,5 +1,6 @@
 package com.ufrgs.faltometro.viewholders;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -7,7 +8,6 @@ import android.widget.TextView;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.ufrgs.faltometro.R;
 
-import carbon.widget.CardView;
 
 /**
  * Created by theo on 2/13/16.

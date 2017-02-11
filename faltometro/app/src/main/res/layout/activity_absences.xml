@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<carbon.widget.RelativeLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,19 +9,19 @@
     android:id="@+id/absence.bg"
     >
 
-    <carbon.widget.CardView
+    <android.support.v7.widget.CardView
         android:id="@+id/absence.card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/carbon_red_50"
+        tools:background="@android:color/holo_red_dark"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
         android:layout_marginTop="70dp"
         android:layout_marginBottom="70dp"
         android:layout_centerInParent="true"
         android:clickable="true"
-        app:carbon_cornerRadius="4dp"
-        app:carbon_elevation="10dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="10dp"
         android:transitionName="@string/transition_card"
         >
 
@@ -63,13 +63,12 @@
                 android:layout_above="@+id/absence.ll_add"
                 />
 
-            <carbon.widget.LinearLayout
+            <LinearLayout
                 android:id="@+id/absence.ll_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:clickable="true"
-                app:carbon_rippleColor="@color/carbon_white"
                 >
 
                 <TextView
@@ -82,12 +81,8 @@
                     android:textColor="@color/text_secondary_light"
                     />
 
-            </carbon.widget.LinearLayout>
+            </LinearLayout>
 
         </RelativeLayout>
-
-
-
-    </carbon.widget.CardView>
-
-</carbon.widget.RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

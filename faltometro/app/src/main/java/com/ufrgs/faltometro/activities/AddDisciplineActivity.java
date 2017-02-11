@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,9 +22,8 @@ import com.ufrgs.faltometro.utils.Tags;
 import com.ufrgs.faltometro.vos.DisciplineVo;
 import com.ufrgs.faltometro.widget.WidgetUpdate;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import carbon.widget.Button;
 
 /**
  * Created by theo on 12/29/15.
@@ -32,28 +32,28 @@ public class AddDisciplineActivity extends AppCompatActivity {
 
     private static final String TAG = "AddDisciplineActivity";
 
-    @Bind(R.id.input_name) EditText inputName;
-    @Bind(R.id.input_credits) EditText inputCredits;
-    @Bind(R.id.input_max_absence) EditText inputMaxAbsences;
-    @Bind(R.id.add_toolbar_title) TextView toolbarTitle;
-    @Bind(R.id.checkbox_seg) CheckBox checkboxSeg;
-    @Bind(R.id.checkbox_ter) CheckBox checkboxTer;
-    @Bind(R.id.checkbox_qua) CheckBox checkboxQua;
-    @Bind(R.id.checkbox_qui) CheckBox checkboxQui;
-    @Bind(R.id.checkbox_sex) CheckBox checkboxSex;
-    @Bind(R.id.checkbox_sab) CheckBox checkboxSab;
-    @Bind(R.id.checkbox_dom) CheckBox checkboxDom;
-    @Bind(R.id.timePicker) TimePicker timePicker;
-    @Bind(R.id.btn_add) Button btnAdd;
-    @Bind(R.id.color_blue) ImageView colorBlue;
-    @Bind(R.id.color_yellow) ImageView colorYellow;
-    @Bind(R.id.color_red) ImageView colorRed;
-    @Bind(R.id.color_orange) ImageView colorOrange;
-    @Bind(R.id.color_purple) ImageView colorPurple;
-    @Bind(R.id.color_grey) ImageView colorGrey;
-    @Bind(R.id.color_green) ImageView colorGreen;
-    @Bind(R.id.color_pink) ImageView colorPink;
-    @Bind(R.id.color_brown) ImageView colorBrown;
+    @BindView(R.id.input_name) EditText inputName;
+    @BindView(R.id.input_credits) EditText inputCredits;
+    @BindView(R.id.input_max_absence) EditText inputMaxAbsences;
+    @BindView(R.id.add_toolbar_title) TextView toolbarTitle;
+    @BindView(R.id.checkbox_seg) CheckBox checkboxSeg;
+    @BindView(R.id.checkbox_ter) CheckBox checkboxTer;
+    @BindView(R.id.checkbox_qua) CheckBox checkboxQua;
+    @BindView(R.id.checkbox_qui) CheckBox checkboxQui;
+    @BindView(R.id.checkbox_sex) CheckBox checkboxSex;
+    @BindView(R.id.checkbox_sab) CheckBox checkboxSab;
+    @BindView(R.id.checkbox_dom) CheckBox checkboxDom;
+    @BindView(R.id.timePicker) TimePicker timePicker;
+    @BindView(R.id.btn_add) Button btnAdd;
+    @BindView(R.id.color_blue) ImageView colorBlue;
+    @BindView(R.id.color_yellow) ImageView colorYellow;
+    @BindView(R.id.color_red) ImageView colorRed;
+    @BindView(R.id.color_orange) ImageView colorOrange;
+    @BindView(R.id.color_purple) ImageView colorPurple;
+    @BindView(R.id.color_grey) ImageView colorGrey;
+    @BindView(R.id.color_green) ImageView colorGreen;
+    @BindView(R.id.color_pink) ImageView colorPink;
+    @BindView(R.id.color_brown) ImageView colorBrown;
 
     private DisciplineVo disciplineVo = null;
     private String colorString = Tags.BLUE_COLOR;
