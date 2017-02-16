@@ -42,6 +42,10 @@
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="xxx" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

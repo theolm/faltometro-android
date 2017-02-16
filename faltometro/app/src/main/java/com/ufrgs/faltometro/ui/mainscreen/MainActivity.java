@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.crashlytics.android.Crashlytics;
 import com.ufrgs.faltometro.R;
 import com.ufrgs.faltometro.adapters.DisciplineAdapter;
 import com.ufrgs.faltometro.dagger.components.DaggerMainScreenComponent;
@@ -26,6 +27,7 @@ import com.ufrgs.faltometro.utils.LayoutUtils;
 import com.ufrgs.faltometro.utils.Tags;
 import com.ufrgs.faltometro.vos.DisciplineVo;
 
+import io.fabric.sdk.android.Fabric;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         LayoutUtils.setStatusBarColor(this, "#ff292929");
