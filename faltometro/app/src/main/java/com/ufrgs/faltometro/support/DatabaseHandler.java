@@ -105,6 +105,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public DisciplineVo getDiscipline(int id)
     {
+        if(id == -1)
+            return null;
+
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_DISCIPLINE, new String[] {

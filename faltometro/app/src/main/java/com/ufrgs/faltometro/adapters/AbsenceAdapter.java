@@ -25,6 +25,10 @@ public class AbsenceAdapter extends RecyclerView.Adapter<AbsenceItemViewHolder> 
     private DisciplineVo disciplineVo;
     private Context mContext;
 
+    public AbsenceAdapter (Context context){
+        mContext = context;
+    }
+
     public AbsenceAdapter (Context context, DisciplineVo discipline){
         mContext = context;
         absenceVoList = discipline.absenceVoList;

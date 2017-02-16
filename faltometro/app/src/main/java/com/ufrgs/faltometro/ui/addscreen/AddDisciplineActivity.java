@@ -1,11 +1,11 @@
-package com.ufrgs.faltometro.activities;
+package com.ufrgs.faltometro.ui.addscreen;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,17 +20,15 @@ import com.ufrgs.faltometro.support.DatabaseHandler;
 import com.ufrgs.faltometro.utils.LayoutUtils;
 import com.ufrgs.faltometro.utils.Tags;
 import com.ufrgs.faltometro.vos.DisciplineVo;
-import com.ufrgs.faltometro.widget.WidgetUpdate;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by theo on 12/29/15.
+ * Created by theolm on 11/02/17.
  */
-public class AddDisciplineActivity extends AppCompatActivity {
 
-    private static final String TAG = "AddDisciplineActivity";
+public class AddDisciplineActivity extends AppCompatActivity implements View.OnClickListener, AddDisciplineContract.View, TextWatcher {
 
     @BindView(R.id.input_name) EditText inputName;
     @BindView(R.id.input_credits) EditText inputCredits;
@@ -55,243 +53,130 @@ public class AddDisciplineActivity extends AppCompatActivity {
     @BindView(R.id.color_pink) ImageView colorPink;
     @BindView(R.id.color_brown) ImageView colorBrown;
 
-    private DisciplineVo disciplineVo = null;
+    private int disciplineId;
     private String colorString = Tags.BLUE_COLOR;
+    private AddDisciplinePresenter mPresenter;
+    private DatabaseHandler db;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_discipline);
         ButterKnife.bind(this);
+        LayoutUtils.setStatusBarColor(this, "#212121");
 
-        int pos = getIntent().getIntExtra("position", -1);
 
-        if(pos != -1){
-            disciplineVo =  DisciplineAdapter.mList.get(pos);
+        mPresenter = new AddDisciplinePresenter(this, this);
+        db = new DatabaseHandler(this);
+
+        disciplineId = getIntent().getIntExtra(Tags.DISCIPLINE_ID, -1);
+
+        if(disciplineId != -1){
             configureEditableActivity();
         }
 
-        LayoutUtils.setStatusBarColor(this, "#212121");
-
+        inputCredits.addTextChangedListener(this);
         timePicker.setIs24HourView(true);
+        btnAdd.setOnClickListener(this);
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        colorBlue.setOnClickListener(this);
+        colorYellow.setOnClickListener(this);
+        colorRed.setOnClickListener(this);
+        colorOrange.setOnClickListener(this);
+        colorPurple.setOnClickListener(this);
+        colorGrey.setOnClickListener(this);
+        colorGreen.setOnClickListener(this);
+        colorPink.setOnClickListener(this);
+        colorBrown.setOnClickListener(this);
 
-                if (!inputName.getText().toString().isEmpty()) {
-                    if (!inputCredits.getText().toString().isEmpty()) {
-
-                        if (disciplineVo == null){
-                            DatabaseHandler db = new DatabaseHandler(AddDisciplineActivity.this);
-                            db.addDiscipline(createDiscipline());
-                        } else {
-                            DatabaseHandler db = new DatabaseHandler(AddDisciplineActivity.this);
-                            db.updateDiscipline(createDiscipline());
-                        }
-                        WidgetUpdate.update(AddDisciplineActivity.this);
-                        finish();
-
-                    } else {
-                        Snackbar.make(v, "Número de créditos necessário.", Snackbar.LENGTH_LONG).show();
-                    }
-                } else {
-                    Snackbar.make(v, "Favor adicionar nome a disciplina.", Snackbar.LENGTH_LONG).show();
-                }
-
-            }
-        });
-
-        inputCredits.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String credits = inputCredits.getText().toString();
-
-                if((!credits.isEmpty()) && (Integer.valueOf(credits) > 0)) {
-                    int maxAbsences = calcMaxAbsences();
-                    inputMaxAbsences.setText(String.valueOf(maxAbsences));
-                }
-
-            }
-        });
-        
-        setColorPicker();
     }
 
-    private DisciplineVo createDiscipline() {
-        DisciplineVo out = new DisciplineVo();
-
-        if (disciplineVo != null) {
-            out = disciplineVo;
-            out.name = inputName.getText().toString();
-            out.credits = Integer.valueOf(inputCredits.getText().toString());
-            out.maxFaults = Integer.valueOf(inputMaxAbsences.getText().toString());
-            out.days = returnDays();
-            out.time = returnTime();
-            out.cor = colorString;
-
-        } else {
-
-            out.name = inputName.getText().toString();
-            out.credits = Integer.valueOf(inputCredits.getText().toString());
-            out.totalFaults = 0;
-            out.maxFaults = Integer.valueOf(inputMaxAbsences.getText().toString());
-            out.days = returnDays();
-            out.time = returnTime();
-            out.cor = colorString;
-        }
-
-
-
-        return out;
-    }
-
-    private String returnDays() {
-        String days;
-        if (checkboxSeg.isChecked()) days = "1";
-        else days = "0";
-        if (checkboxTer.isChecked()) days = days + "1";
-        else days = days + "0";
-        if (checkboxQua.isChecked()) days = days + "1";
-        else days = days + "0";
-        if (checkboxQui.isChecked()) days = days + "1";
-        else days = days + "0";
-        if (checkboxSex.isChecked()) days = days + "1";
-        else days = days + "0";
-        if (checkboxSab.isChecked()) days = days + "1";
-        else days = days + "0";
-        if (checkboxDom.isChecked()) days = days + "1";
-        else days = days + "0";
-
-        return days;
-    }
-
-    private String returnTime() {
-        timePicker.clearFocus();
-
-        int hora = timePicker.getCurrentHour();
-        int min = timePicker.getCurrentMinute();
-
-        String horaString, minString;
-
-        if (hora < 10)
-            horaString = "0" + String.valueOf(hora);
-        else
-            horaString = String.valueOf(hora);
-
-        if (min < 10)
-            minString = "0" + String.valueOf(min);
-        else
-            minString = String.valueOf(min);
-
-
-        String time = String.valueOf(horaString + "h" + minString);
-        return time;
-    }
-
-    private void setColorPicker(){
-        colorBlue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "setColorPicker: ");
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_add:
+                mPresenter.onClickAdd(disciplineId, inputName, inputCredits, inputMaxAbsences, returnDays(), returnTime(), colorString);
+                break;
+            case R.id.color_blue:
                 colorString = Tags.BLUE_COLOR;
                 deselectAllColors();
                 colorBlue.setImageResource(R.drawable.ic_check_white_24dp);
-            }
-        });
-
-        colorYellow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.color_yellow:
                 colorString = Tags.YELLOW_COLOR;
                 deselectAllColors();
                 colorYellow.setImageResource(R.drawable.ic_check_white_24dp);
-            }
-        });
-
-        colorRed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.color_red:
                 colorString = Tags.RED_COLOR;
                 deselectAllColors();
                 colorRed.setImageResource(R.drawable.ic_check_white_24dp);
-            }
-        });
-
-        colorOrange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.color_orange:
                 colorString = Tags.ORANGE_COLOR;
                 deselectAllColors();
                 colorOrange.setImageResource(R.drawable.ic_check_white_24dp);
-            }
-        });
-
-        colorPurple.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.color_purple:
                 colorString = Tags.PURPLE_COLOR;
                 deselectAllColors();
                 colorPurple.setImageResource(R.drawable.ic_check_white_24dp);
-            }
-        });
-
-        colorGrey.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.color_grey:
                 colorString = Tags.GREY_COLOR;
                 deselectAllColors();
                 colorGrey.setImageResource(R.drawable.ic_check_white_24dp);
-            }
-        });
-
-        colorGreen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.color_green:
                 colorString = Tags.GREEN_COLOR;
                 deselectAllColors();
                 colorGreen.setImageResource(R.drawable.ic_check_white_24dp);
-            }
-        });
-
-        colorPink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.color_pink:
                 colorString = Tags.PINK_COLOR;
                 deselectAllColors();
                 colorPink.setImageResource(R.drawable.ic_check_white_24dp);
-            }
-        });
-
-        colorBrown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.color_brown:
                 colorString = Tags.BROWN_COLOR;
                 deselectAllColors();
                 colorBrown.setImageResource(R.drawable.ic_check_white_24dp);
-            }
-        });
+                break;
+        }
     }
 
-    private void deselectAllColors(){
-        colorBlue.setImageBitmap(null);
-        colorYellow.setImageBitmap(null);
-        colorRed.setImageBitmap(null);
-        colorOrange.setImageBitmap(null);
-        colorPurple.setImageBitmap(null);
+    @Override
+    public void showMaxCredits(String maxCredits) {
+        inputMaxAbsences.setText(maxCredits);
+    }
+
+    @Override
+    public void showSnackbar(String message) {
+        Snackbar.make(inputName, message, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void closeScreen() {
+        this.finish();
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+        mPresenter.calculateMaxCredits(inputCredits.getText().toString());
     }
 
     private void configureEditableActivity(){
+        DisciplineVo disciplineVo = db.getDiscipline(disciplineId);
         inputName.setText(disciplineVo.name);
         inputCredits.setText(String.valueOf(disciplineVo.credits));
         inputMaxAbsences.setText(String.valueOf(disciplineVo.maxFaults));
@@ -365,7 +250,54 @@ public class AddDisciplineActivity extends AppCompatActivity {
 
     }
 
-    private int calcMaxAbsences(){
-        return Integer.valueOf(inputCredits.getText().toString()) * 2;
+    private void deselectAllColors(){
+        colorBlue.setImageBitmap(null);
+        colorYellow.setImageBitmap(null);
+        colorRed.setImageBitmap(null);
+        colorOrange.setImageBitmap(null);
+        colorPurple.setImageBitmap(null);
+    }
+
+    private String returnDays() {
+        String days;
+        if (checkboxSeg.isChecked()) days = "1";
+        else days = "0";
+        if (checkboxTer.isChecked()) days = days + "1";
+        else days = days + "0";
+        if (checkboxQua.isChecked()) days = days + "1";
+        else days = days + "0";
+        if (checkboxQui.isChecked()) days = days + "1";
+        else days = days + "0";
+        if (checkboxSex.isChecked()) days = days + "1";
+        else days = days + "0";
+        if (checkboxSab.isChecked()) days = days + "1";
+        else days = days + "0";
+        if (checkboxDom.isChecked()) days = days + "1";
+        else days = days + "0";
+
+        return days;
+    }
+
+    private String returnTime() {
+        timePicker.clearFocus();
+
+        int hora = timePicker.getCurrentHour();
+        int min = timePicker.getCurrentMinute();
+
+        String horaString, minString;
+
+        if (hora < 10)
+            horaString = "0" + String.valueOf(hora);
+        else
+            horaString = String.valueOf(hora);
+
+        if (min < 10)
+            minString = "0" + String.valueOf(min);
+        else
+            minString = String.valueOf(min);
+
+
+        String time = String.valueOf(horaString + "h" + minString);
+        return time;
     }
 }

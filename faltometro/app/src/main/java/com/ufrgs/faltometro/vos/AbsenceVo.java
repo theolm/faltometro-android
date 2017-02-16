@@ -1,5 +1,6 @@
 package com.ufrgs.faltometro.vos;
 
+
 /**
  * Created by theo on 2/13/16.
  */

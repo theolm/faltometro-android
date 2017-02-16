@@ -6,14 +6,11 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RemoteViews;
 
 import com.ufrgs.faltometro.R;
-import com.ufrgs.faltometro.activities.MainActivity;
+import com.ufrgs.faltometro.ui.mainscreen.MainActivity;
 
 /**
  * @author Alan Wink

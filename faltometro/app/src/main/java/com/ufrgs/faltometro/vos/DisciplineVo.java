@@ -1,5 +1,8 @@
 package com.ufrgs.faltometro.vos;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,4 +21,5 @@ public class DisciplineVo {
     public String cor;
     public List<AbsenceVo> absenceVoList = new ArrayList<>();
     public int hash;
+
 }

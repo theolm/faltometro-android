@@ -1,21 +1,14 @@
 package com.ufrgs.faltometro.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
 import com.ufrgs.faltometro.R;
-import com.ufrgs.faltometro.activities.AbsencesActivity;
 import com.ufrgs.faltometro.vos.DisciplineVo;
 
 import java.util.ArrayList;
@@ -28,12 +21,17 @@ import com.ufrgs.faltometro.viewholders.DisciplineViewHolder;
  */
 public class DisciplineAdapter extends RecyclerView.Adapter<DisciplineViewHolder> {
 
-    public static List<DisciplineVo> mList = new ArrayList<>();
+    private List<DisciplineVo> mList;
     private Context mContext;
 
     private static int HEADER_TYPE = 0;
     private static int OTHERS_TYPE = 1;
 
+
+    public DisciplineAdapter(Context mContext) {
+        this.mContext = mContext;
+        this.mList = new ArrayList<>();
+    }
 
     public DisciplineAdapter(Context context, List<DisciplineVo> list){
         mContext = context;
@@ -89,24 +87,25 @@ public class DisciplineAdapter extends RecyclerView.Adapter<DisciplineViewHolder
 
         int series1Index = holder.decoView.addSeries(seriesItem1);
 
+
         holder.decoView.addEvent(new DecoEvent.Builder(vo.totalFaults).setIndex(series1Index).setDelay(0).build());
 
-        holder.card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(mContext, AbsencesActivity.class);
-                i.putExtra("position", position);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptionsCompat options = ActivityOptionsCompat.
-                            makeSceneTransitionAnimation((Activity) mContext , holder.card, mContext.getString(R.string.transition_card));
-                    mContext.startActivity(i, options.toBundle());
-                }
-                else {
-                    mContext.startActivity(i);
-                }
-            }
-        });
+//        holder.card.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(mContext, AbsencesActivity_old.class);
+//                i.putExtra("position", position);
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    ActivityOptionsCompat options = ActivityOptionsCompat.
+//                            makeSceneTransitionAnimation((Activity) mContext , holder.card, mContext.getString(R.string.transition_card));
+//                    mContext.startActivity(i, options.toBundle());
+//                }
+//                else {
+//                    mContext.startActivity(i);
+//                }
+//            }
+//        });
 
     }
 
@@ -116,6 +115,7 @@ public class DisciplineAdapter extends RecyclerView.Adapter<DisciplineViewHolder
     }
 
     public void reloadAdapter(List<DisciplineVo> list){
+        mList.clear();
         mList = list;
         notifyDataSetChanged();
     }
