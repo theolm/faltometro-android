@@ -16,10 +16,14 @@ import android.widget.TimePicker;
 
 import com.ufrgs.faltometro.R;
 import com.ufrgs.faltometro.adapters.DisciplineAdapter;
+import com.ufrgs.faltometro.dagger.components.DaggerAddDisciplineComponent;
+import com.ufrgs.faltometro.dagger.modules.AddDisciplineScreenModule;
 import com.ufrgs.faltometro.support.DatabaseHandler;
 import com.ufrgs.faltometro.utils.LayoutUtils;
 import com.ufrgs.faltometro.utils.Tags;
 import com.ufrgs.faltometro.vos.DisciplineVo;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,11 +56,12 @@ public class AddDisciplineActivity extends AppCompatActivity implements View.OnC
     @BindView(R.id.color_green) ImageView colorGreen;
     @BindView(R.id.color_pink) ImageView colorPink;
     @BindView(R.id.color_brown) ImageView colorBrown;
+    @Inject AddDisciplinePresenter mPresenter;
+    @Inject DatabaseHandler db;
 
     private int disciplineId;
     private String colorString = Tags.BLUE_COLOR;
-    private AddDisciplinePresenter mPresenter;
-    private DatabaseHandler db;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,9 +70,9 @@ public class AddDisciplineActivity extends AppCompatActivity implements View.OnC
         ButterKnife.bind(this);
         LayoutUtils.setStatusBarColor(this, "#212121");
 
-
-        mPresenter = new AddDisciplinePresenter(this, this);
-        db = new DatabaseHandler(this);
+        DaggerAddDisciplineComponent.builder()
+                .addDisciplineScreenModule(new AddDisciplineScreenModule(this, this))
+                .build().inject(this);
 
         disciplineId = getIntent().getIntExtra(Tags.DISCIPLINE_ID, -1);
 

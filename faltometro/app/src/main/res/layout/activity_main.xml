@@ -80,8 +80,6 @@
             app:rippleColor="@android:color/white"
             app:layout_anchor="@id/recyclerview"
             app:layout_anchorGravity="bottom|right|end"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:layout_behavior="com.ufrgs.faltometro.utils.ScrollAwareFABBehavior"
             />
 
     </android.support.design.widget.CoordinatorLayout>
