@@ -30,3 +30,5 @@ proguard/
 
 # Android Studio captures folder
 captures/
+
+faltometro/app/src/main/res/values/apikey\.xml
